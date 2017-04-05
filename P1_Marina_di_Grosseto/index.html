@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Simulazioni REDLAV</title>
+<meta charset="UTF-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://code.jquery.com/jquery-{{JQUERY_VERSION}}.min.js"></script>
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Cantarell|Josefin+Sans+Std+Light">
+<style type="text/css">
+header {
+   font-family: 'Josefin Sans Std Light', sans-serif;
+   font-size: 24px;
+}
+p {
+   font-family: 'Cantarell', sans-serif;
+   font-size: 18px;
+}
+ 
+div.static {
+             position: static;
+             height: auto;
+             top: 5px; 
+             bottom: 5px;
+             border: 3px solid #73AD21;
+            }
+iframe {
+    
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 500px;
+    width: 100%;
+}
+     
+</style>  
+</head>
+<body>
+<header>Visualizzazione Simulazioni RAedesSim<br>
+<p id="file">File visualizzato: Eggs_P1_Marina_di_Grosseto_S_100_90_0_0_10.html</p>
+</header>
+<p>Attivare il layer nella pagina con il menu a sinistra in alto. La visualizzazione può apparire lenta e vuole un browser con capacità canvas</p>
+<div class="static">
+Sito
+<select id="sito" name="sito">
+	<option value="P1_Marina_di_Grosseto">P1_Marina_di_Grosseto</option>
+	<option value="P2_Marina_di_Grosseto">P2_Marina_di_Grosseto</option>
+        <option value="P3_Principina">P3_Principina</option>
+        <option value="P5_Castiglione_della_Pescaia">P5_Castiglione_della_Pescaia</option>
+        <option value="P19_Vada">P19_Vada</option>
+        <option value="P20_Vada">P20_Vada</option>     
+</select><br>
+Initial diapausant eggs
+<select id="Eggs" name="Eggs">
+	<option value="100">100</option>
+	<option value="300">300</option>
+	<option value="500">500</option>
+	<option value="700">700</option>
+	<option value="1000">1000</option>	  
+</select>
+Max JD diapause emergence
+<select id="delay_emergence" name="delay_emergence">
+	<option value="90">90</option>
+	<option value="110">110</option>
+	<option value="130">130</option>	
+</select>
+Spring Bias T Water (degC)
+<select id="deltawT_prim" name="deltawT_prim">
+	<option value="0">0</option>
+	<option value="2">0</option>	
+</select>
+Autumal Bias  T Water (degC)
+<select id="deltawT_aut" name="deltawT_aut">
+	<option value="0">0</option>
+	<option value="2">0</option>	
+</select><br>
+Layer
+<select id="layer" name="layer">
+        <option value="Eggs">Eggs comparison</option>
+       	<option value="Allpop">All Population comparison</option>	
+	<option value="exclosion">Exclosion graph</option>
+</select><br>
+<button id="loadfile" onclick="loadhtml()">Visualizza</button>
+</div>
+<script>
+function loadhtml() {
+    var sito = document.getElementById("sito").value;
+    var Eggs = document.getElementById("Eggs").value;
+    var delay_emergence = document.getElementById("delay_emergence").value;
+    var deltawT_prim = document.getElementById("deltawT_prim").value;
+    var deltawT_aut = document.getElementById("deltawT_aut").value;
+    var layer = document.getElementById("layer").value;
+    
+    var files= "<red>File visualizzato</red>: "+layer+"_"+sito+"_S_"+Eggs+"_"+delay_emergence+"_"+deltawT_prim+"_"+deltawT_aut+"_10.html" 
+    document.getElementById("file").innerHTML = files;
+    document.all.iframe_WTA.src=sito+"/"+layer+"_"+sito+"_S_"+Eggs+"_"+delay_emergence+"_"+deltawT_prim+"_"+deltawT_aut+"_10.html"
+    document.all.table.href=sito+"/"+"table_"+"_"+sito+"_S_"+Eggs+"_"+delay_emergence+"_"+deltawT_prim+"_"+deltawT_aut+"_10.xls"
+    document.all.filemodel.href=sito+"/"+"Model_sim_"+"_"+sito+"_S_"+Eggs+"_"+delay_emergence+"_"+deltawT_prim+"_"+deltawT_aut+"_10.xls"
+    document.all.filepop.href=sito+"/"+"Pop_daily_"+"_"+sito+"_S_"+Eggs+"_"+delay_emergence+"_"+deltawT_prim+"_"+deltawT_aut+"_10.xls"
+    document.all.filepar.href=sito+"/"+"Par_daily_"+"_"+sito+"_S_"+Eggs+"_"+delay_emergence+"_"+deltawT_prim+"_"+deltawT_aut+"_10.xls"
+    document.all.fileeggs.href=sito+"/"+"data_eggs_"+"_"+sito+"_S_"+Eggs+"_"+delay_emergence+"_"+deltawT_prim+"_"+deltawT_aut+"_10.xls"
+   
+}
+</script>
+<iframe id="iframe_WTA" src="P1_Marina_di_Grosseto/Eggs_P1_Marina_di_Grosseto_S_1000_130_2_2_10.html" style="height=600"></iframe>
+<p><a id="table" href="P1_Marina_di_Grosseto/table_P1_Marina_di_Grosseto.xls" target="_blank">Dati simulazione</a></p>
+<p><a id="filepop" href="P1_Marina_di_Grosseto/Pop_daily_P1_Marina_di_Grosseto_S_100_90_0_0_10.xls" target="_blank">Dati popolazione simulazione</a></p>
+<p><a id="filemodel" href="P1_Marina_di_Grosseto/Model_sim_P1_Marina_di_Grosseto_S_100_90_0_0_10.xls" target="_blank">Dati modelli</a></p>
+<p><a id="filepar" href="P1_Marina_di_Grosseto/Par_daily_P1_Marina_di_Grosseto_S_100_90_0_0_10.xls" target="_blank">Dati parametri biometeo</a></p>
+<p><a id="fileeggs" href="P1_Marina_di_Grosseto/data_eggs_P1_Marina_di_Grosseto_S_100_90_0_0_10.xls" target="_blank">Dati confronto uova</a></p>
+
+<p><a id="filegen" href="table_full_simulation.xls" target="_blank">Tabella riassuntiva</a></p>
+
+<footer>LaMMA IBIMET-CNR - ASL Lucca</footer>
+</body>
+</html>
